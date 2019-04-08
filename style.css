@@ -286,3 +286,31 @@ canvas + div {
   text-align: center;
   padding: 1rem 1rem;
 }
+
+
+/*---   FOOTER   ---*/
+
+footer {
+  height: 300px;
+  text-align: center;
+  box-shadow: 0 -2rem 4rem 1rem rgba(245, 245, 245, 1);
+  margin-top: 9rem;
+}
+
+footer figure {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  width: 80%;
+}
+
+footer img {
+  background-color: white;
+  align-self: center;
+  margin: 2rem;
+}
+
+footer i {
+  color: #1e4d9d;
+  margin-top: 3rem;
+}

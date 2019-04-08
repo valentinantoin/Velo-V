@@ -49,3 +49,35 @@ Canvas.prototype.initMouse = function() {
         Canvas.signature = 1;
     };
 };
+
+
+//---ADD TOUCH DRAWING METHOD
+Canvas.prototype.initTouch = function() {
+
+    //---ADD EVENT LISTENERS
+    canvas.addEventListener("touchstart", touchDown);
+    canvas.addEventListener("touchend", touchUp);
+
+    //---ADD MOTION DETECTION
+    function touchDown(e) {
+        ctx.beginPath();
+        var touchX = e.touches[0].pageX - e.touches[0].target.offsetLeft;
+        var touchY = e.touches[0].pageY - e.touches[0].target.offsetTop;
+        ctx.moveTo(touchX, touchY);
+        canvas.addEventListener("touchmove", paint);
+        e.preventDefault();
+    };
+
+    function touchUp(e) {
+        canvas.removeEventListener("touchmove", paint);
+        paint(e);
+    };
+
+    function paint(e) {
+        var touchX = e.touches[0].pageX - e.touches[0].target.offsetLeft;
+        var touchY = e.touches[0].pageY - e.touches[0].target.offsetTop;
+        ctx.lineTo(touchX, touchY);
+        ctx.stroke();
+        Canvas.signature = 1;
+    };
+};

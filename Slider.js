@@ -34,3 +34,17 @@ Slider.prototype.play = function() {
     }
     this.refresh();
 };
+
+
+//---ADD NEXT SLIDE METHOD
+Slider.prototype.next = function() {
+    this.index++;
+    if(this.index === this.slides.length) {
+        this.index = 0;
+    }
+    this.refresh();
+    if(this.timer !== null) {
+        window.clearInterval(this.timer);
+        this.timer = window.setInterval(this.play.bind(this), 5000);
+    };
+};

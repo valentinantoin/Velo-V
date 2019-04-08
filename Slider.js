@@ -76,3 +76,19 @@ Slider.prototype.pause = function(pause) {
     };
     pause.preventDefault();
 };
+
+
+//---ADD REFRESH METHOD
+Slider.prototype.refresh = function() {
+    slide.src = this.slides[this.index];
+
+    if(this.index === 0 || this.index === 3) {
+        presentation_l.innerHTML = this.text[this.index];
+        presentation_l.classList.replace("presentation", "presentation_l");
+        presentation_r.classList.replace("presentation_r", "presentation");
+    }else {
+        presentation_r.innerHTML = this.text[this.index];
+        presentation_r.classList.replace("presentation", "presentation_r");
+        presentation_l.classList.replace("presentation_l", "presentation");
+    }   
+};

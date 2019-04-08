@@ -48,3 +48,17 @@ Slider.prototype.next = function() {
         this.timer = window.setInterval(this.play.bind(this), 5000);
     };
 };
+
+
+//---ADD PREVIOUS SLIDE METHOD
+Slider.prototype.prev = function() {
+    this.index--;
+    if(this.index < 0){
+        this.index = this.slides.length - 1;
+    }
+    this.refresh();
+    if(this.timer !== null) {
+        window.clearInterval(this.timer);
+        this.timer = window.setInterval(this.play.bind(this), 5000);
+    };
+};

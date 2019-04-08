@@ -1,0 +1,2 @@
+// SRICT MODE
+"use strict";

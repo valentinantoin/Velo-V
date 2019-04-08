@@ -92,3 +92,13 @@ Slider.prototype.refresh = function() {
         presentation_l.classList.replace("presentation_l", "presentation");
     }   
 };
+
+
+//---ADD KEYCONTROL
+Slider.prototype.keyControl = function(e) {
+        if(e.keyCode === 37){
+            this.prev();
+        } else if(e.keyCode === 39){
+            this.next();
+        };
+};

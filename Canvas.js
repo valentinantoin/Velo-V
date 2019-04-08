@@ -91,3 +91,49 @@ Canvas.prototype.clearing = function(clearing) {
 };
 
 buttonClear.addEventListener("click", Canvas.prototype.clearing);
+
+
+//---ADD VALIDATE METHOD
+Canvas.prototype.validate = function(validate) {
+
+    var lastName = localStorage.getItem("lastName");
+    var firstName = localStorage.getItem("firstName");
+    var stationName = sessionStorage.getItem("stationName");
+
+    var timeRemaining = 1200;
+
+    if(Canvas.signature !== 1) {
+
+        signWarning.innerHTML = "<p>Votre signature est obligatoire afin de valider la réservation.</p>";
+   
+    }else {
+
+    setInterval(calculate, 1000);
+
+    function calculate() {
+
+	  if(timeRemaining >= 0) {
+
+          var minutes = parseInt(timeRemaining / 60);
+ 
+          var seconds = parseInt(timeRemaining % 60)
+
+          canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button class=\"button\" onClick=\"window.location.reload()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
+          resa.innerHTML = "<p>Votre réservation au nom de : " + lastName + " " + firstName + "," + " est valable à la station " + stationName +" pendant : <br><br>" +  minutes + "min et " + seconds + "s.</p>" ;
+          resa.classList.replace("resa", "resa_on");
+          dispo.innerHTML = "";
+          
+        }else {
+
+          canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button class=\"button\" onClick=\"window.location.reload()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
+           resa.innerHTML = "<p>Votre réservation a expirée !</p>";
+           resa.classList.replace("resa", "resa_on");
+        }
+
+        timeRemaining--;
+    };
+};
+   validate.preventDefault();
+};
+
+buttonAccept.addEventListener("click", Canvas.prototype.validate);

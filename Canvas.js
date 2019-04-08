@@ -10,3 +10,14 @@ var buttonAccept = document.getElementById("buttonAccept");
 var resa = document.getElementById("resa");
 var signWarning = document.getElementById("signWarning");
 
+
+//---CANVAS OBJECT CREATION
+class Canvas {
+    constructor() {
+        this.initMouse,
+        this.initTouch,
+        this.clearing,
+        this.validate,
+        this.signature;
+    }
+};

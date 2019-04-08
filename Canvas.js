@@ -81,3 +81,13 @@ Canvas.prototype.initTouch = function() {
         Canvas.signature = 1;
     };
 };
+
+
+//---ADD CLEARING METHOD
+Canvas.prototype.clearing = function(clearing) {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+    Canvas.signature = 0;
+    clearing.preventDefault();
+};
+
+buttonClear.addEventListener("click", Canvas.prototype.clearing);

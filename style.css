@@ -1,0 +1,80 @@
+/*---   ANIMATION   ---*/
+
+@keyframes translate {
+
+  from {
+    transform: translateX(-100rem);
+    -webkit-transform: translateX(-100rem);
+    -ms-transform: translateX(-100rem);
+  }
+}
+
+@-webkit-keyframes translate {
+
+  from {
+    transform: translateX(-100rem);
+    -webkit-transform: translateX(-100rem);
+    -ms-transform: translateX(-100rem);
+  }
+}
+
+
+/*---   GLOBAL   ---*/
+
+main {
+  margin-top: 5rem;
+}
+
+body {
+  font-family: Ubuntu;
+  margin: 0;
+}
+
+
+/*---   HEADER   ---*/
+
+header{
+  width: 100%;
+  background-color: rgba(255,255,255,0.9);
+  position: fixed;
+  top: 0;
+  z-index: 99999;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav a {
+  text-decoration: none;
+  color: #e11f26;
+  font-size: 1.5rem;
+}
+
+nav a:hover {
+  border-bottom: 2px solid #e11f26;
+
+}
+
+header li {
+  list-style-type: none;
+  margin-top: 1rem;
+}
+
+header ul {
+  display: none;
+  margin-left: -7rem;
+}
+
+nav {
+  margin: 2rem;
+  width: 20%;
+
+}
+
+nav:hover ul {
+  display: block;
+}
+
+header figure {
+  animation: translate 1s;
+  -webkit-animation: translate 1s;
+}

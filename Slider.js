@@ -62,3 +62,17 @@ Slider.prototype.prev = function() {
         this.timer = window.setInterval(this.play.bind(this), 5000);
     };
 };
+
+
+//---ADD PAUSE METHOD
+Slider.prototype.pause = function(pause) {
+    if(this.timer == null) {
+        this.timer = window.setInterval(this.play.bind(this), 5000);
+        pauseIcon.classList.replace("fa-play", "fa-pause");
+    }else {
+        window.clearInterval(this.timer);
+        this.timer = null;
+        pauseIcon.classList.replace("fa-pause", "fa-play");
+    };
+    pause.preventDefault();
+};

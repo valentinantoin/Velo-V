@@ -77,3 +77,41 @@ var redMarker = L.icon({
       });
   });
 };
+
+
+//---ADD RESERVATION FUNCTION
+Map.prototype.reservation = function(e) {
+
+//---GET VALUE OF INPUTS
+    var lastName = document.getElementById("yourLastName").value;
+    var firstName = document.getElementById("yourFirstName").value;
+    var canvasContainer = document.getElementById("canvasContainer");
+    var attention = document.createElement("p");
+    dispo.appendChild(attention);
+
+
+    //---VERIFY INPUTS VALUE
+    if((lastName !== "") && (firstName !== "")) {
+
+      //---SET VALUES IN LOCALSTORAGE
+      localStorage.setItem("firstName", firstName);
+      localStorage.setItem("lastName", lastName);
+
+      //---DISPLAY THE CANVAS
+      canvasContainer.classList.replace("canvasOff", "canvas");
+      dispo.classList.replace("dispo_on", "dispo_off");
+
+
+    }else {
+      attention.innerHTML = "Veuillez saisir vos Nom et Prénom svp";
+      
+    };
+  
+    e.preventDefault();
+
+};
+//---SET THE EVENT FOR SCRIPT.JS
+var button = document.getElementById("button");
+
+//---RESERVATION INIT
+button.addEventListener("click", Map.prototype.reservation);

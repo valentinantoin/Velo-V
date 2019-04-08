@@ -24,3 +24,13 @@ var Slider = function() {
     pause.addEventListener("click", this.pause.bind(this));
     document.addEventListener("keydown", this.keyControl.bind(this));
 };
+
+
+//---ADD PLAY METHOD
+Slider.prototype.play = function() {
+    this.index++;
+    if(this.index === this.slides.length) {
+        this.index = 0;
+    }
+    this.refresh();
+};

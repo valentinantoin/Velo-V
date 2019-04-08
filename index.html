@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<!--   HEAD   -->
+
+    <head>
+
+    <!--  MAIN META   -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--  TITLE   -->
+        <title>Vélo'V Lyon</title>
+
+    <!--  SECONDARY META  -->
+        <meta name="description" content="Service de réservation de Vélo'V">
+        <meta name="author" content="Valentin ANTOIN">
+
+    <!--  OPENGRAPH  -->
+        <meta property="og:title" content="Vélo'V Lyon">
+        <meta property="og:type" content="website">
+        <meta property="url" content="http://velov.valentin-antoin.fr">
+        <meta property="og:image" content="images/logo.png">
+        <meta property="og:description" content="Service de réservation de Vélo'V">
+
+    <!--  TWITTER  -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="http://velov.valentin-antoin.fr">
+        <meta name="twitter:title" content="Vélo'V Lyon">
+        <meta name="twitter:description" content="Service de réservation de Vélo'V">
+        <meta name="twitter:creator" content="@Valentin_Antoin">
+        <meta name="twitter:image" content="images/logo.png">
+
+
+    <!--  ICONS   -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+
+    <!--   FONTS   -->
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> 
+        
+
+    <!--   NORMALIZE   -->
+        <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+
+    <!--   GOOGLE SEARCH CONSOLE   -->
+        
+
+    <!--  CSS STYLESHEET   -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""/>
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+
+    <body>
+
+<!--   HEADER   -->
+
+        <header>
+
+            <figure class="logo">
+                <a href="#top">
+                  <img src="images/logo.png" alt="logo Vélo'V">
+                </a>
+            </figure>
+
+            
+            <nav>
+              <div class="deroulant"><i class="fas fa-bars fa-2x"></i></div>
+              <ul>
+                <li>
+                  <a href="#top" title="Bienvenue">Présentation</a>
+                </li>
+                <li>
+                  <a href="#reservation" title="Réservez un vélo'V">Réservation</a>
+                </li>
+                <li>
+                  <a href="#contact" title="Contactez nous">Contact</a>
+                </li>
+              </ul>
+            </nav>
+            
+        </header>
+
+        <main>
+
+<!--   SLIDER   -->
+            
+            <section id="slider">
+
+              <h2 id="presentation_l" class="presentation">Bienvenue sur le site de réservation de vélo'v !</h2>
+              <h2 id="presentation_r" class="presentation">Bienvenue sur le site de réservation de vélo'v !</h2>
+            
+              <figure id="slides">
+                  <img src="images/slide6.jpg" alt="Jeune femme à vélo">
+              </figure>
+
+              <a href="#" id="control_next"><i class="fas fa-chevron-right fa-2x"></i></a>
+              <a href="#" id="control_prev"><i class="fas fa-chevron-left fa-2x"></i></a>
+              <a href="#" id="pause"><i id="pauseIcon" class="fas fa-pause fa-2x"></i></a>
+
+            </section>
+
+
+
+<!--   MAP   -->
+
+        <section id="reservation">
+
+            <div id="map"></div>
+
+
+<!--   FORM   -->
+
+            <form class="info">
+                <h3>Information de la station</h3>
+                  <ul>
+                    <li id="title"></li>
+                    <li id="address"></li>
+                    <li id="places"></li>
+                    <li id="bikes"></li>
+                  </ul>
+
+                <div id="dispo" class="dispo_on">
+                  <p><label for="yourLastName">Votre Nom :</label><br><input type="text" id="yourLastName" placeholder="Nom" required></p>
+                  <p><label for="yourFirstName">Votre Prénom :</label><br><input type="text" id="yourFirstName" placeholder="Prénom" required></p>
+                  <p><input type="submit" value="Réserver !" class="button" id="button"></p>
+
+              </div>
+
+                    <div id="canvasContainer" class="canvasOff">
+
+                        <h3>Signature :</h3>
+                        <canvas id="signatureCanvas"></canvas>
+                        <div id="buttonsContainer">
+                          <button id="buttonClear" class="button">Effacer</button>
+                          <button id="buttonAccept" class="button">Valider</button>
+                        </div>
+                        <p id="signWarning"></p>
+
+                    </div>
+                
+                
+
+            </form>
+
+        </section>
+
+        <div class="resa" id="resa"></div>
+
+        </main>
+
+<!--   FOOTER   -->
+
+        <footer id="contact">
+
+            <a href="https://www.facebook.com/velov.officiel/" title="Facebook"><i class="fab fa-facebook-square fa-4x"></i></a>
+
+            <figure>
+                <img src="images/logo.png" alt="logo Vélo'V">
+                <img src="images/logo-lyon.png" alt="logo grand lyon">
+            </figure>
+            
+        </footer>
+
+
+<!--   SCRIPT   -->
+
+
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin=""></script>
+
+        <script src="js/Slider.js"></script>
+        <script src="js/ajax.js"></script>
+        <script src="js/Map.js"></script>
+        <script src="js/Canvas.js"></script>
+        <script src="js/script.js"></script>
+
+    </body>
+</html>

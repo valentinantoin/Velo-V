@@ -300,21 +300,21 @@ footer {
 footer figure {
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
   text-align: center;
-  width: 80%;
 }
 
 footer img {
   background-color: white;
   align-self: center;
-  margin: 2rem;
+  margin: 1rem;
+  width: 100%;
 }
 
 footer i {
   color: #1e4d9d;
   margin-top: 3rem;
 }
-
 
 /*----------------------------------   MEDIAQ   -----------------------------------------------*/
 
@@ -430,6 +430,15 @@ footer i {
   footer {
     height: 400px;
   }
+
+  footer figure {
+    flex-direction: row;
+    margin: 2rem;
+  }
+
+  footer img {
+    width: auto;
+  }
 }
 
 
@@ -469,6 +478,16 @@ footer i {
     width: 90%;
     margin-left: 5%;
   }
+
+  /*---   FOOTER   ---*/
+
+  footer figure {
+    justify-content: space-around;
+  }
+
+  footer img {
+    width: auto;
+  }
 }
 
 @media(min-width: 1448px) {
@@ -486,4 +505,5 @@ footer i {
     width: 70%;
     margin-left: 15%;
   }
+
 }

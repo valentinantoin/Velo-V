@@ -1,3 +1,4 @@
+
 // STRICT MODE
 "use strict";
 
@@ -25,7 +26,7 @@ Map.prototype.init = function() {
   }).addTo(Map.tile);
 
 
-//---POSITION DATA FROM JCDECAUX
+//---VARIABLES DECLARATION
   var form = document.querySelector("form");
   var title = document.getElementById("title");
   var address = document.getElementById("address");
@@ -34,21 +35,12 @@ Map.prototype.init = function() {
   var dispo = document.getElementById("dispo");
 
 
-//---CREATE N0 DISPO MARKER
-var redMarker = L.icon({
-  iconUrl: "images/redPlaceholder.png",
-
-  iconSize : [25, 38],
-  iconAnchor: [22, 94],
-  popupAnchor: [-10, -95]
-});
-
-
+  //---CALL AJAX GET FUNCTION
   ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=lyon&apiKey=1328d2932ef5b44f742e45744429937adb04b5d2", function(reponse){
       var stations = JSON.parse(reponse);
       stations.forEach(function(station){
 
-
+          //---GET STATION DATA FROM JCDECAUX
           var pop =  function(){
 
               form.classList.replace("info","showinfo");
@@ -69,6 +61,16 @@ var redMarker = L.icon({
 
           };
 
+          //---CREATE N0 DISPO MARKER
+          var redMarker = L.icon({
+          iconUrl: "images/redPlaceholder.png",
+
+          iconSize : [25, 38],
+          iconAnchor: [22, 94],
+          popupAnchor: [-10, -95]
+          });
+
+          //---CREATE AND PLACE MARKERS ON MAP
           if(station.available_bikes !== 0) {
             var marker = L.marker(station.position).on("click", pop).addTo(Map.tile);
           }else {
@@ -77,7 +79,6 @@ var redMarker = L.icon({
       });
   });
 };
-
 
 //---ADD RESERVATION FUNCTION
 Map.prototype.reservation = function(e) {

@@ -9,6 +9,8 @@ var buttonClear = document.getElementById("buttonClear");
 var buttonAccept = document.getElementById("buttonAccept");
 var resa = document.getElementById("resa");
 var signWarning = document.getElementById("signWarning");
+var touchX;
+var touchY;
 
 
 //---CANVAS OBJECT CREATION
@@ -49,7 +51,6 @@ Canvas.prototype.initMouse = function() {
     };
 };
 
-
 //---ADD TOUCH DRAWING METHOD
 Canvas.prototype.initTouch = function() {
 
@@ -57,11 +58,17 @@ Canvas.prototype.initTouch = function() {
     canvas.addEventListener("touchstart", touchDown);
     canvas.addEventListener("touchend", touchUp);
 
+    //---GET TOUCHES POSITION
+    function touches(e) {
+        var canvasCss = e.target.getBoundingClientRect();
+         touchX = e.targetTouches[0].clientX - canvasCss.left;
+         touchY = e.targetTouches[0].clientY - canvasCss.top;
+    };
+
     //---ADD MOTION DETECTION
     function touchDown(e) {
         ctx.beginPath();
-        var touchX = e.touches[0].pageX - e.touches[0].target.offsetLeft;
-        var touchY = e.touches[0].pageY - e.touches[0].target.offsetTop;
+        touches(e);
         ctx.moveTo(touchX, touchY);
         canvas.addEventListener("touchmove", paint);
         e.preventDefault();
@@ -73,8 +80,7 @@ Canvas.prototype.initTouch = function() {
     };
 
     function paint(e) {
-        var touchX = e.touches[0].pageX - e.touches[0].target.offsetLeft;
-        var touchY = e.touches[0].pageY - e.touches[0].target.offsetTop;
+        touches(e);
         ctx.lineTo(touchX, touchY);
         ctx.stroke();
         Canvas.signature = 1;
@@ -117,7 +123,7 @@ Canvas.prototype.validate = function(validate) {
  
           var seconds = parseInt(timeRemaining % 60)
 
-          canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button href=\"#reservation\"class=\"button\" onClick=\"window.location.reload()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
+          canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button href=\"#reservation\" class=\"button\" onClick=\"window.location.reload()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
           resa.innerHTML = "<p>Votre réservation au nom de : " + lastName + " " + firstName + "," + " est valable à la station " + stationName +" pendant : <br><br>" +  minutes + "min et " + seconds + "s.</p>" ;
           resa.classList.replace("resa", "resa_on");
           dispo.innerHTML = "";

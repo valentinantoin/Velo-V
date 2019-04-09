@@ -1,7 +1,8 @@
+
 // STRICT MODE
 "use strict";
 
-
+//---VERIFY DOM IS FULLY LOADED
 document.addEventListener('DOMContentLoaded', function() {
  
  //---SLIDER INIT 

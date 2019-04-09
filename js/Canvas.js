@@ -1,6 +1,6 @@
+
 // STRICT MODE
 "use strict";
-
 
 //---VARIABLE DECLARATIONS
 var canvas = document.getElementById("signatureCanvas"),
@@ -21,7 +21,6 @@ class Canvas {
         this.signature;
     }
 };
-
 
 //---ADD MOUSE DRAWING METHOD
 Canvas.prototype.initMouse = function() {
@@ -118,14 +117,14 @@ Canvas.prototype.validate = function(validate) {
  
           var seconds = parseInt(timeRemaining % 60)
 
-          canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button class=\"button\" onClick=\"window.location.reload()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
+          canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button href=\"#reservation\"class=\"button\" onClick=\"window.location.reload()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
           resa.innerHTML = "<p>Votre réservation au nom de : " + lastName + " " + firstName + "," + " est valable à la station " + stationName +" pendant : <br><br>" +  minutes + "min et " + seconds + "s.</p>" ;
           resa.classList.replace("resa", "resa_on");
           dispo.innerHTML = "";
           
         }else {
 
-          canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button class=\"button\" onClick=\"window.location.reload()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
+          canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button href=\"#reservation\" class=\"button\" onClick=\"window.location.reload()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
            resa.innerHTML = "<p>Votre réservation a expirée !</p>";
            resa.classList.replace("resa", "resa_on");
         }

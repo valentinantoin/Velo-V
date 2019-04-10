@@ -80,6 +80,10 @@ Map.prototype.init = function() {
   });
 };
 
+//---CREATE P FOR RESERVATION MESSAGE
+var attention = document.createElement("p");
+dispo.appendChild(attention);
+
 //---ADD RESERVATION FUNCTION
 Map.prototype.reservation = function(e) {
 
@@ -87,9 +91,7 @@ Map.prototype.reservation = function(e) {
     var lastName = document.getElementById("yourLastName").value;
     var firstName = document.getElementById("yourFirstName").value;
     var canvasContainer = document.getElementById("canvasContainer");
-    var attention = document.createElement("p");
-    dispo.appendChild(attention);
-
+    
 
     //---VERIFY INPUTS VALUE
     if((lastName !== "") && (firstName !== "")) {

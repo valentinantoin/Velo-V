@@ -179,13 +179,19 @@ main > section:nth-of-type(2) {
   justify-content: space-around;
 }
 
-main > section:nth-of-type(2) > div {
+.map_on {
   height: 400px;
   width: 80%;
   margin: 1rem auto;
   border: 5px solid #e11f26;
   border-radius: 20px;
 }
+
+.map_off {
+  display: none;
+}
+
+
 
 
 /*---   INFO   ---*/
@@ -195,6 +201,16 @@ main > section:nth-of-type(2) > div {
 }
 
 .showinfo {
+  display: block;
+  height: 725px;
+  width: 90%;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  background-color: #e11f26;
+  border-radius: 20px;
+}
+
+.showinfo_onresa {
   display: block;
   height: 725px;
   width: 90%;

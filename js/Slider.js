@@ -14,6 +14,7 @@ var presentation_r = document.getElementById("presentation_r");
 //---SLIDER OBJECT CREATION
 var Slider = function() {
     this.slides = ["images/slide6.jpg", "images/slide1.jpg", "images/slide3.jpg", "images/slide0.jpg"];
+    this.alt = ["Jeune femme à vélo", "Vélo'v vue de près", "Rangée de Vélo'v", "Femme qui prend un Vélo'v"];
     this.text = ["Bienvenue sur le site de réservation de vélo'v !", "Selectionnez simplement une station sur la carte pour obtenir les informations et disponibilités de celle-ci", "Indiquez vos nom et prénom, signez et nous réservons juste pour vous un vélo'v pendant 20 minutes.", "Bonne balade à vous !!"];
     this.index = -1;
     this.timer = window.setInterval(this.play.bind(this), 5000);
@@ -81,6 +82,7 @@ Slider.prototype.pause = function(pause) {
 //---ADD REFRESH METHOD
 Slider.prototype.refresh = function() {
     slide.src = this.slides[this.index];
+    slide.alt = this.alt[this.index];
 
     if(this.index === 0 || this.index === 3) {
         presentation_l.innerHTML = this.text[this.index];

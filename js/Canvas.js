@@ -9,6 +9,8 @@ var buttonClear = document.getElementById("buttonClear");
 var buttonAccept = document.getElementById("buttonAccept");
 var resa = document.getElementById("resa");
 var signWarning = document.getElementById("signWarning");
+var form = document.querySelector("form");
+var map_on = document.getElementById("map");
 var touchX;
 var touchY;
 
@@ -23,6 +25,7 @@ class Canvas {
         this.signature;
     }
 };
+
 
 //---ADD MOUSE DRAWING METHOD
 Canvas.prototype.initMouse = function() {
@@ -90,7 +93,7 @@ Canvas.prototype.initTouch = function() {
 
 //---ADD CLEARING METHOD
 Canvas.prototype.clearing = function(clearing) {
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     Canvas.signature = 0;
     clearing.preventDefault();
 };
@@ -98,14 +101,31 @@ Canvas.prototype.clearing = function(clearing) {
 buttonClear.addEventListener("click", Canvas.prototype.clearing);
 
 
+
+
+
+//---ADD RESERVATION CHECKING METHOD
+
+Canvas.prototype.reservation = function() {
+
+    var reservation = sessionStorage.getItem("reservation");
+
+    if(reservation == 1) {
+
+        canvasContainer.classList.replace("canvasOff", "canvas");
+        form.classList.replace("info","showinfo_onresa");
+        map.classList.replace("map_on","map_off");
+
+        var timeRemaining = sessionStorage.getItem("timer");
+
+        setInterval(calculate, 1000);
+        calculate();
+};
+};
+
+
 //---ADD VALIDATE METHOD
 Canvas.prototype.validate = function(validate) {
-
-    var lastName = localStorage.getItem("lastName");
-    var firstName = localStorage.getItem("firstName");
-    var stationName = sessionStorage.getItem("stationName");
-
-    var timeRemaining = 1200;
 
     if(Canvas.signature !== 1) {
 
@@ -113,32 +133,53 @@ Canvas.prototype.validate = function(validate) {
    
     }else {
 
-    setInterval(calculate, 1000);
+        var reservation = sessionStorage.setItem("reservation", 1);
+
+        var timeRemaining = 1200;
+        var timer = sessionStorage.setItem("timer", 1200);
+
+        canvasContainer.classList.replace("canvasOff", "canvas");
+        form.classList.replace("showinfo","showinfo_onresa");
+        map.classList.replace("map_on","map_off");
+
+        setInterval(calculate, 1000);
+        calculate();
+};
+
+   validate.preventDefault();
+};
+
+buttonAccept.addEventListener("click", Canvas.prototype.validate);
+
+
+//---CREATE TIMER FUNCTION
 
     function calculate() {
 
-	  if(timeRemaining >= 0) {
+        var lastName = localStorage.getItem("lastName");
+        var firstName = localStorage.getItem("firstName");
+        var stationName = sessionStorage.getItem("stationName");
+        var timeRemaining = sessionStorage.getItem("timer");
+
+      if(timeRemaining >= 0) {
+
 
           var minutes = parseInt(timeRemaining / 60);
  
           var seconds = parseInt(timeRemaining % 60)
 
-          canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button href=\"#reservation\" class=\"button\" onClick=\"window.location.reload()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
+          canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button href=\"#reservation\" class=\"button\" onClick=\"window.location.reload(), sessionStorage.clear()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
           resa.innerHTML = "<p>Votre réservation au nom de : " + lastName + " " + firstName + "," + " est valable à la station " + stationName +" pendant : <br><br>" +  minutes + "min et " + seconds + "s.</p>" ;
-          resa.classList.replace("resa", "resa_on");
           dispo.innerHTML = "";
+          var reservation = sessionStorage.setItem("reservation", 1);
           
         }else {
 
           canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button href=\"#reservation\" class=\"button\" onClick=\"window.location.reload()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
            resa.innerHTML = "<p>Votre réservation a expirée !</p>";
-           resa.classList.replace("resa", "resa_on");
+           var reservation = sessionStorage.setItem("reservation", 0);
         }
 
         timeRemaining--;
+        var timer = sessionStorage.setItem("timer",timeRemaining);
     };
-};
-   validate.preventDefault();
-};
-
-buttonAccept.addEventListener("click", Canvas.prototype.validate);

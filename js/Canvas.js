@@ -116,9 +116,8 @@ Canvas.prototype.reservation = function() {
         form.classList.replace("info","showinfo_onresa");
         map.classList.replace("map_on","map_off");
 
-        var timeRemaining = sessionStorage.getItem("timer");
+        var distance = sessionStorage.getItem("timer");
 
-        setInterval(calculate, 1000);
         calculate();
 };
 };
@@ -135,14 +134,19 @@ Canvas.prototype.validate = function(validate) {
 
         var reservation = sessionStorage.setItem("reservation", 1);
 
-        var timeRemaining = 1200;
-        var timer = sessionStorage.setItem("timer", 1200);
 
         canvasContainer.classList.replace("canvasOff", "canvas");
         form.classList.replace("showinfo","showinfo_onresa");
         map.classList.replace("map_on","map_off");
 
-        setInterval(calculate, 1000);
+
+        var now = new Date().getTime();
+        var delay = 20 * 60 * 1000;
+        var countDownDate = new Date().getTime() + delay;
+        var expiration = sessionStorage.setItem("expiration", countDownDate);
+        var distance = expiration - now;
+        var timer = sessionStorage.setItem("timer", distance);
+
         calculate();
 };
 
@@ -159,14 +163,24 @@ buttonAccept.addEventListener("click", Canvas.prototype.validate);
         var lastName = localStorage.getItem("lastName");
         var firstName = localStorage.getItem("firstName");
         var stationName = sessionStorage.getItem("stationName");
-        var timeRemaining = sessionStorage.getItem("timer");
+        var expiration = sessionStorage.getItem("expiration");
+        var x = setInterval(function() {
 
-      if(timeRemaining >= 0) {
+          // Get todays date and time
+          var now = new Date().getTime();
+
+          // Find the distance between now and the count down date
+         var distance = expiration - now;
 
 
-          var minutes = parseInt(timeRemaining / 60);
- 
-          var seconds = parseInt(timeRemaining % 60)
+          var timer = sessionStorage.setItem("timer", distance);
+
+          // Time calculations for days, hours, minutes and seconds
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+      if(distance > 0) {
 
           canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button href=\"#reservation\" class=\"button\" onClick=\"window.location.reload(), sessionStorage.clear()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
           resa.innerHTML = "<p>Votre réservation au nom de : " + lastName + " " + firstName + "," + " est valable à la station " + stationName +" pendant : <br><br>" +  minutes + "min et " + seconds + "s.</p>" ;
@@ -176,10 +190,12 @@ buttonAccept.addEventListener("click", Canvas.prototype.validate);
         }else {
 
           canvasContainer.innerHTML = "<p><strong>Votre demande a été prise en compte avec succés !<br><br>Détails de votre réservation ci-dessous.</strong></p><button href=\"#reservation\" class=\"button\" onClick=\"window.location.reload()\">Effectuer une nouvelle réservation</button><p><em>La nouvelle réservation remplacera la précédente.</em></p>";
-           resa.innerHTML = "<p>Votre réservation a expirée !</p>";
-           var reservation = sessionStorage.setItem("reservation", 0);
+          resa.innerHTML = "<p>Votre réservation a expirée !</p>";
+          var reservation = sessionStorage.setItem("reservation", 0);
+          clearInterval(x);
         }
 
-        timeRemaining--;
-        var timer = sessionStorage.setItem("timer",timeRemaining);
-    };
+
+    } ,1000);
+
+}
